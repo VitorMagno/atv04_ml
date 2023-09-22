@@ -1,6 +1,7 @@
 # atv04_ml
-atividade prática de aprendizado não supervisionado
-Descobrir os perfis dos dados de acordo com um agrupamento adequado
+Atividade prática de aprendizado não supervisionado
+
+Objetivo: Descobrir os perfis dos dados de acordo com um agrupamento adequado
 
 Descrição das colunas:
 - Index = índice
