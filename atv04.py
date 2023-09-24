@@ -1,40 +1,26 @@
-#%%
+# %%
 import pandas as pd
-from sklearn.cluster import MeanShift, estimate_bandwidth
-from sklearn.datasets import make_blobs
-# %%
-df = pd.read_excel('./RTVue_20221110_MLClass.xlsx')
+from sklearn import mixture
+import seaborn as sns
+import numpy as np
 
 # %%
-df.head()
-
-# %%
-df.isna().sum()
-
-# %%
-df_oldtype = df.dropna(axis=0, inplace=False)
-df_oldtype
-
-# %%
-df_oldtype.dtypes
-
-# %%
-df_oldtype.drop(columns=['Index', 'pID'], inplace=True)
-
+df = pd.read_csv('./csv')
+df.drop(columns=['Unnamed: 0'], inplace=True)
 #%%
-filtro_genero = df_oldtype['Gender'] == 'F'
-filtro_eye = df_oldtype['Eye'] == 'OS'
-
-#%%
-df_oldtype.loc[filtro_genero, 'Gender'] = 0
-df_oldtype.loc[filtro_genero == False, 'Gender'] = 1
-
-df_oldtype.loc[filtro_eye, 'Eye'] = 0
-df_oldtype.loc[filtro_eye == False, 'Eye'] = 1
-
-#%%
-df_newtype = df_oldtype.convert_dtypes()
-
+model = mixture.BayesianGaussianMixture(n_components=10)
 # %%
-bandwidth_oldtypes = estimate_bandwidth(df_oldtype, quantile=0.2)
-bandwidth_newtypes = estimate_bandwidth(df_newtype, quantile=0.2)
+model.weight_concentration_prior_ = 'dirichlet_distribution'
+#%%
+model.fit(df)
+# %%
+labels = model.predict(df)
+#%%
+y = df.copy()
+#%%
+y['label'] = labels
+# %%
+y
+# %%
+sns.pairplot(data=y, hue='label', kind='kde', height = 20)
+# %%
