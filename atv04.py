@@ -1,14 +1,20 @@
 # %%
-# import pandas as pd
-# from sklearn import mixture
-# import seaborn as sns
-# import numpy as np
-# from scipy import stats
-# # %%
-# df = pd.read_csv('./csv')
-# df.drop(columns=['Unnamed: 0'], inplace=True)
+import pandas as pd
+from sklearn import mixture
+import seaborn as sns
+import numpy as np
+from scipy import stats
+# %%
+df = pd.read_csv('./csv')
+#%%
+df
+#%%
+df.drop(columns=['Unnamed: 0'], inplace=True)
+#%%
+df
+#%%
 cols = ['Age', 'C', 'S', 'ST', 'T', 'IT', 'I', 'IN', 'N', 'SN']
-# # remocao de outliers #
+# remocao de outliers #
 # for col in cols:
 #     print(f"Old Shape: {df.shape}")
 #     z = np.abs(stats.zscore(df[col]))
@@ -32,14 +38,6 @@ y = df.copy()
 y['label'] = labels
 #%%
 y.groupby(by='label')['Age'].describe()
-# %%
-y.groupby(by='label')['DI'].describe()
-# %%
-y.groupby(by='label')['ES'].describe()
-# %%
-y.groupby(by='label')['M'].describe()
-# %%
-y.groupby(by='label')['F'].describe()
 # %%
 y.groupby(by='label')['C'].describe()
 # %%
