@@ -74,3 +74,44 @@ y.groupby(by='label')['SN'].agg(['count', 'mean', 'std', 'min', 'max'])
 # sns.pairplot(data=y, hue='label', kind='scatter')
 
 # %%
+from sklearn.cluster import KMeans
+
+# %%
+model = KMeans(n_clusters=8, random_state=12, n_init="auto")
+model.fit(df)
+model.labels_
+#%%
+model_y = df.copy()
+model_y['label'] = model.predict(df)
+#%%
+model_y.groupby(by='label')['Age'].agg(['count', 'mean', 'std', 'min', 'max'])
+
+#%%
+model_y.groupby(by='label')['C'].agg(['count', 'mean', 'std', 'min', 'max'])
+
+# %%
+model_y.groupby(by='label')['S'].agg(['count', 'mean', 'std', 'min', 'max'])
+
+# %%
+model_y.groupby(by='label')['ST'].agg(['count', 'mean', 'std', 'min', 'max'])
+
+# %%
+model_y.groupby(by='label')['T'].agg(['count', 'mean', 'std', 'min', 'max'])
+
+# %%
+model_y.groupby(by='label')['IT'].agg(['count', 'mean', 'std', 'min', 'max'])
+
+# %%
+model_y.groupby(by='label')['I'].agg(['count', 'mean', 'std', 'min', 'max'])
+
+# %%
+model_y.groupby(by='label')['IN'].agg(['count', 'mean', 'std', 'min', 'max'])
+
+# %%
+model_y.groupby(by='label')['N'].agg(['count', 'mean', 'std', 'min', 'max'])
+
+# %%
+model_y.groupby(by='label')['SN'].agg(['count', 'mean', 'std', 'min', 'max'])
+
+# %%
+sns.pairplot(data=model_y, hue='label', kind='kde')
